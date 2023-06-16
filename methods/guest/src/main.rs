@@ -4,7 +4,7 @@
 
 
 use risc0_zkvm::guest::env;
-use risc0_zkvm::serde::from_slice;
+// use risc0_zkvm::serde::from_slice;
 use risc0_zkvm::sha::{Impl, Sha256};
 
 
@@ -789,7 +789,7 @@ fn main() {
     for (label, value) in mm.labels {
         // println!("Label: {}", label);
         match value.deref() {
-            LabelEntry::DollarA(a) => {
+            LabelEntry::DollarA(_a) => {
                 // // println!("Verifying hypothesis  {:?}", a);
                 // axioms.push(a);
             }
@@ -808,7 +808,7 @@ fn main() {
     // let elapsed = now.elapsed();
     // println!("Finished checking in {:.2?}, with result {}", elapsed, out);
     // env::commit(&axioms);
-    let mut theorembytevec = some_theorem.as_bytes().to_vec();
+    let theorembytevec = some_theorem.as_bytes().to_vec();
     let theorem_hash = Impl::hash_bytes(&theorembytevec[..]);
 
     env::commit(&*theorem_hash);
