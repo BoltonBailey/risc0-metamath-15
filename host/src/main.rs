@@ -75,7 +75,7 @@ fn analyze() {
         let mut exec = Executor::from_elf(env, METHOD_NAME_ELF).unwrap();
 
         println!("Running session");
-        start_time = SystemTime::now();
+        let mut start_time = SystemTime::now();
 
         // Run the executor to produce a session.
         let session = exec.run().unwrap();
