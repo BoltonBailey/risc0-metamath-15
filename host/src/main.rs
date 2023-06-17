@@ -26,13 +26,14 @@ fn analyze() {
         .map(|l| l.expect("Could not parse line"))
         .collect();
 
-    let mut current_time = SystemTime::now();
-
     let mut max_lines = 10;
     while max_lines < axiom_file_lines.len() {
+
         max_lines *= 2;
 
         let num_lines_to_take = cmp::min(max_lines, axiom_file_lines.len());
+
+
 
         // let mut shortened_axiom_file_lines = axiom_file_lines.copy();
 
@@ -74,40 +75,52 @@ fn analyze() {
         let mut exec = Executor::from_elf(env, METHOD_NAME_ELF).unwrap();
 
         println!("Running session");
+        start_time = SystemTime::now();
 
         // Run the executor to produce a session.
         let session = exec.run().unwrap();
 
-        println!("Proving session");
-
-        // Prove the session to produce a receipt.
-        let receipt = session.prove().unwrap();
-
-        let theorem_hash : Digest = from_slice(&receipt.journal).unwrap();
-
-        println!(
-            "The metamath prover succeeds, and claims it can prove theorem hash {:?}",
-            theorem_hash
-        );
-        // TODO: Implement code for transmitting or serializing the receipt for
-        // other parties to verify here
-
-        // Optional: Verify receipt to confirm that recipients will also be able to
-        // verify your receipt
-        receipt.verify(METHOD_NAME_ID).unwrap();
-
-
-        match SystemTime::now().duration_since(current_time) {
+        match SystemTime::now().duration_since(start_time) {
             Ok(n) => println!(
-                "The ZK metamath verifier check succeeded, taking {} milliseconds for {} lines",
+                "The non-ZK metamath ran the session, taking {} milliseconds for {} lines",
                 n.as_millis(),
                 num_lines_to_take
             ),
             Err(_) => panic!("SystemTime error"),
         }
-        
 
-        current_time = SystemTime::now();
+        println!("Proving session");
+        start_time = SystemTime::now();
+
+        // Prove the session to produce a receipt.
+        let receipt = session.prove().unwrap();
+
+        match SystemTime::now().duration_since(start_time) {
+            Ok(n) => println!(
+                "The ZK metamath ran the session, taking {} milliseconds for {} lines",
+                n.as_millis(),
+                num_lines_to_take
+            ),
+            Err(_) => panic!("SystemTime error"),
+        }
+
+        println!("Verifying");
+        start_time = SystemTime::now();
+
+
+        let theorem_hash : Digest = from_slice(&receipt.journal).unwrap();
+        receipt.verify(METHOD_NAME_ID).unwrap();
+
+        match SystemTime::now().duration_since(start_time) {
+            Ok(n) => println!(
+                "The ZK metamath verifier succeeds in verifying the proof, taking {} milliseconds for {} lines",
+                n.as_millis(),
+                num_lines_to_take
+            ),
+            Err(_) => panic!("SystemTime error"),
+        }
+
+
 
     }
 
