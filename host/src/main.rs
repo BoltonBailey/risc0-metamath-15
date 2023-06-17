@@ -19,7 +19,7 @@ fn analyze() {
 
     println!("Reading metamath file");
 
-    let axiom_file = File::open("theory/mm-benchmarks/sum.mm".clone()).expect("Failed to find file");
+    let axiom_file = File::open("theory/mm-benchmarks/transfer-goal.mm".clone()).expect("Failed to find file");
 
     let axiom_file_lines: Vec<String> = BufReader::new(axiom_file)
         .lines()
@@ -28,7 +28,7 @@ fn analyze() {
 
     let mut current_time = SystemTime::now();
 
-    let mut max_lines = 50;
+    let mut max_lines = 10;
     while max_lines < axiom_file_lines.len() {
         max_lines *= 2;
 
@@ -99,8 +99,8 @@ fn analyze() {
 
         match SystemTime::now().duration_since(current_time) {
             Ok(n) => println!(
-                "The ZK metamath verifier check succeeded, taking {} seconds for {} lines",
-                n.as_secs(),
+                "The ZK metamath verifier check succeeded, taking {} milliseconds for {} lines",
+                n.as_millis(),
                 num_lines_to_take
             ),
             Err(_) => panic!("SystemTime error"),

@@ -214,7 +214,7 @@ impl FrameStack {
         let frame = &mut self.list.last_mut().unwrap();
 
         if frame.c.contains(&token) {
-            panic!("Const already defined")
+            panic!("Const {} already defined", token.deref())
         }
         if frame.v.contains(&token) {
             panic!("Const already defined as var in scope")
