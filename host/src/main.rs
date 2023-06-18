@@ -25,6 +25,8 @@ fn analyze() {
         .map(|l| l.expect("Could not parse line"))
         .collect();
 
+    println!("Metamath file has ", axiom_file_lines.len(), " lines.")
+
     let mut max_lines = 10;
     while max_lines < axiom_file_lines.len() {
 
