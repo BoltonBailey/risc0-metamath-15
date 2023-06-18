@@ -14,17 +14,18 @@ use std::io::BufRead;
 use std::cmp;
 use std::time::{SystemTime};
 
-
 fn analyze() {
 
     println!("Reading metamath file");
 
-    let axiom_file = File::open("theory/mm-benchmarks/transfer-goal.mm".clone()).expect("Failed to find file");
+    let axiom_file = File::open("theory/set_comp4.mm".clone()).expect("Failed to find file"); // mm-benchmarks/transfer-goal.mm
 
     let axiom_file_lines: Vec<String> = BufReader::new(axiom_file)
         .lines()
         .map(|l| l.expect("Could not parse line"))
         .collect();
+
+    println!("Metamath file has {} lines.", axiom_file_lines.len());
 
     let mut max_lines = 10;
     while max_lines < axiom_file_lines.len() {
@@ -32,8 +33,6 @@ fn analyze() {
         max_lines *= 2;
 
         let num_lines_to_take = cmp::min(max_lines, axiom_file_lines.len());
-
-
 
         // let mut shortened_axiom_file_lines = axiom_file_lines.copy();
 
@@ -108,7 +107,7 @@ fn analyze() {
         start_time = SystemTime::now();
 
 
-        let theorem_hash : Digest = from_slice(&receipt.journal).unwrap();
+        // let theorem_hash : Digest = from_slice(&receipt.journal).unwrap();
         receipt.verify(METHOD_NAME_ID).unwrap();
 
         match SystemTime::now().duration_since(start_time) {
