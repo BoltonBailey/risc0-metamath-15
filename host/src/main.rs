@@ -108,7 +108,7 @@ fn analyze() {
         start_time = SystemTime::now();
 
 
-        let theorem_hash : Digest = from_slice(&receipt.journal).unwrap();
+        // let theorem_hash : Digest = from_slice(&receipt.journal).unwrap();
         receipt.verify(METHOD_NAME_ID).unwrap();
 
         match SystemTime::now().duration_since(start_time) {
