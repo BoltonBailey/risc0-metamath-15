@@ -19,7 +19,7 @@ fn analyze() {
 
     println!("Reading metamath file");
 
-    let axiom_file = File::open("theory/mm-benchmarks/transfer-goal.mm".clone()).expect("Failed to find file");
+    let axiom_file = File::open("theory/set_comp4.mm".clone()).expect("Failed to find file"); // mm-benchmarks/transfer-goal
 
     let axiom_file_lines: Vec<String> = BufReader::new(axiom_file)
         .lines()
