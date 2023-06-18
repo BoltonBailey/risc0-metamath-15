@@ -1,0 +1,46 @@
+Reading metamath file
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 358 milliseconds for 20 lines
+Proving session
+The ZK metamath ran the session, taking 19073 milliseconds for 20 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 7 milliseconds for 20 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 791 milliseconds for 40 lines
+Proving session
+The ZK metamath ran the session, taking 37664 milliseconds for 40 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 7 milliseconds for 40 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 1776 milliseconds for 80 lines
+Proving session
+The ZK metamath ran the session, taking 38949 milliseconds for 80 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 7 milliseconds for 80 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 23516 milliseconds for 160 lines
+Proving session
+The ZK metamath ran the session, taking 396348 milliseconds for 160 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 42 milliseconds for 160 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 64435 milliseconds for 192 lines
+Proving session
+The ZK metamath ran the session, taking 978544 milliseconds for 192 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 105 milliseconds for 192 lines
