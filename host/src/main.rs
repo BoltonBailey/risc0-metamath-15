@@ -3,10 +3,10 @@
 // `METHOD_NAME_ID` with `MULTIPLY_ID`
 use methods::{METHOD_NAME_ELF, METHOD_NAME_ID};
 use risc0_zkvm::{
-    serde::{from_slice, to_vec},
+    serde::{to_vec},
     Executor, ExecutorEnv,
 };
-use risc0_zkvm::sha::Digest;
+// use risc0_zkvm::sha::Digest;
 
 use std::fs::File; 
 use std::io::BufReader;
@@ -18,7 +18,7 @@ fn analyze() {
 
     println!("Reading metamath file");
 
-    let axiom_file = File::open("theory/set_comp4.mm".clone()).expect("Failed to find file"); // mm-benchmarks/transfer-goal.mm
+    let axiom_file = File::open("theory/set_comp5.mm".clone()).expect("Failed to find file"); // mm-benchmarks/transfer-goal.mm
 
     let axiom_file_lines: Vec<String> = BufReader::new(axiom_file)
         .lines()
