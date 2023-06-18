@@ -1,0 +1,71 @@
+Reading metamath file
+Metamath file has 56693 lines.
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 180 milliseconds for 20 lines
+Proving session
+The ZK metamath ran the session, taking 3660 milliseconds for 20 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 3 milliseconds for 20 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 319 milliseconds for 40 lines
+Proving session
+The ZK metamath ran the session, taking 3701 milliseconds for 40 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 3 milliseconds for 40 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 667 milliseconds for 80 lines
+Proving session
+The ZK metamath ran the session, taking 7422 milliseconds for 80 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 4 milliseconds for 80 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 1451 milliseconds for 160 lines
+Proving session
+The ZK metamath ran the session, taking 14177 milliseconds for 160 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 5 milliseconds for 160 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 3360 milliseconds for 320 lines
+Proving session
+The ZK metamath ran the session, taking 22564 milliseconds for 320 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 8 milliseconds for 320 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 7581 milliseconds for 640 lines
+Proving session
+The ZK metamath ran the session, taking 48537 milliseconds for 640 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 17 milliseconds for 640 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+The non-ZK metamath ran the session, taking 44632 milliseconds for 1280 lines
+Proving session
+The ZK metamath ran the session, taking 249643 milliseconds for 1280 lines
+Verifying
+The ZK metamath verifier succeeds in verifying the proof, taking 73 milliseconds for 1280 lines
+Serializing metamath file
+Serializing target theorem
+Creating environment
+Running session
+thread 'main' panicked at 'called `Result::unwrap()` on an `Err` value: Guest panicked: panicked at 'no entry found for key', src/main.rs:580:48', host/src/main.rs:80:34
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
