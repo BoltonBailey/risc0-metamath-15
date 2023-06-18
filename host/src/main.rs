@@ -25,7 +25,7 @@ fn analyze() {
         .map(|l| l.expect("Could not parse line"))
         .collect();
 
-    println!("Metamath file has ", axiom_file_lines.len(), " lines.")
+    println!("Metamath file has {} lines.", axiom_file_lines.len())
 
     let mut max_lines = 10;
     while max_lines < axiom_file_lines.len() {
@@ -33,8 +33,6 @@ fn analyze() {
         max_lines *= 2;
 
         let num_lines_to_take = cmp::min(max_lines, axiom_file_lines.len());
-
-
 
         // let mut shortened_axiom_file_lines = axiom_file_lines.copy();
 
