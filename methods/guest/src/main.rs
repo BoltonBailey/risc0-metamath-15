@@ -80,7 +80,8 @@ impl Tokens {
         // println!("reading file");
 
         let mut token = self.read();
-        // println!("In read file found token {:?}", token);
+
+        // Read in imported filenames until we run out, then return the next token.
         while let Some("$[") = token.as_deref() {
             let filename = self.read().expect("Couldn't find filename");
             let end_bracket = self.read().expect("Couldn't find end bracket");
@@ -112,6 +113,7 @@ impl Tokens {
             // println!("In read comment: found token to be {:?}", token);
             match &token {
                 None => return None,
+                // If token is comment start, loop reading more tokens until we reach a comment end, then
                 Some(x) if x == "$(" => loop {
                     match token.as_deref() {
                         Some("$)") => break,
