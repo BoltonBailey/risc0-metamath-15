@@ -125,8 +125,63 @@ fn analyze() {
 
 }
 
+fn test_wff() {
+    println!("Reading wff.mm metamath file");
+
+    let axiom_file = File::open("theory/mm-benchmarks/wff.mm".clone()).expect("Failed to find file"); 
+
+    let axiom_file_lines: Vec<String> = BufReader::new(axiom_file)
+        .lines()
+        .map(|l| l.expect("Could not parse line"))
+        .collect();
+
+    println!("Metamath file has {} lines.", axiom_file_lines.len());
+
+    println!("Serializing metamath file");
+
+    let serialized_file: Vec<u32> = to_vec(&axiom_file_lines).unwrap();
+
+    println!("Serializing target theorem");
+
+    let target_theorem: String = "th1".to_string();
+
+    let serialized_target_theorem: Vec<u32> = to_vec(&target_theorem).unwrap();
+
+
+    println!("Creating environment");
+
+    let env = ExecutorEnv::builder()
+        .add_input(&serialized_target_theorem)
+        .add_input(&serialized_file)
+        .build();
+
+    // Next, we make an executor, loading the (renamed) ELF binary.
+    let mut exec = Executor::from_elf(env, METHOD_NAME_ELF).unwrap();
+
+    println!("Running session");
+
+    // Run the executor to produce a session.
+    let session = exec.run().unwrap();
+
+
+    println!("Proving session");
+
+    // Prove the session to produce a receipt.
+    let receipt = session.prove().unwrap();
+
+
+
+    println!("Verifying");
+
+
+    // let theorem_hash : Digest = from_slice(&receipt.journal).unwrap();
+    receipt.verify(METHOD_NAME_ID).unwrap();
+
+
+}
+
 fn main() {
 
-    analyze()
+    test_wff()
 
 }
