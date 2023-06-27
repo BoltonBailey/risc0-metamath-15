@@ -43,14 +43,14 @@ pub type LanguageToken = Rc<str>;
 impl Tokens {
     pub fn new(tokens: Vec<String>) -> Tokens {
 
-        let mut token_buffer: VecDeque<String> = VecDeque::new();
+        // let mut token_buffer: VecDeque<String> = VecDeque::new();
 
-        for token in tokens {
-            token_buffer.push_back(token);
-        }
+        // for token in tokens {
+        //     token_buffer.push_back(token);
+        // }
 
         Tokens {
-            token_buffer,
+            token_buffer : VecDeque::from(tokens),
             // imported_files: BTreeSet::new(),
         }
     }
