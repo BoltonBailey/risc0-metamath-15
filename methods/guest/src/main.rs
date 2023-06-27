@@ -115,21 +115,23 @@ impl Tokens {
     pub fn read_comment(&mut self) -> Option<String> {
         // println!("reading comment");
 
-        loop {
-            let mut token = self.read_file();
-            // println!("In read comment: found token to be {:?}", token);
-            match &token {
-                None => return None,
-                // If token is comment start, loop reading more tokens until we reach a comment end, then
-                Some(x) if x == "$(" => loop {
-                    match token.as_deref() {
-                        Some("$)") => break,
-                        _ => token = self.read(),
-                    }
-                },
-                _ => return token,
-            }
-        }
+        // loop {
+        //     let mut token = self.read_file();
+        //     // println!("In read comment: found token to be {:?}", token);
+        //     match &token {
+        //         None => return None,
+        //         // If token is comment start, loop reading more tokens until we reach a comment end, then
+        //         Some(x) if x == "$(" => loop {
+        //             match token.as_deref() {
+        //                 Some("$)") => break,
+        //                 _ => token = self.read(),
+        //             }
+        //         },
+        //         _ => return token,
+        //     }
+        // }
+
+        self.read_file()
     }
 
     pub fn read_statement(&mut self) -> Statement {
