@@ -49,22 +49,21 @@ impl Tokens {
             imported_files: BTreeSet::new(),
         }
     }
+
+    /// Reads a token. If there are no tokens in the token buffer initially, moves lines to the token buffer until there is.
     pub fn read(&mut self) -> Option<String> {
-        // println!("inside read function with state {:?}", self);
+
         while self.token_buffer.is_empty() {
-            //println!("Buffer is empty, refilling");
             
             let result = self.lines_buffer.pop_front();
             // let result: Option<String> = env::read();
 
             match result {
                 Some(line) => {
-                    // println!("Read {} lines ", num);
                     self.token_buffer = line.split_whitespace().map(|x| x.into()).collect();
                     self.token_buffer.reverse();
                 }
                 _ => {
-                    // println!("Done with file");
                     self.lines_buffer.pop_front();
                     if self.lines_buffer.is_empty() {
                         return None;
