@@ -28,8 +28,7 @@ use core::ops::Deref;
 
 #[derive(Debug)]
 pub struct Tokens {
-    lines_buffer: VecDeque<String>,
-    token_buffer: Vec<String>,
+    token_buffer: VecDeque<String>,
     imported_files: BTreeSet<String>,
 }
 
@@ -43,9 +42,17 @@ pub type LanguageToken = Rc<str>;
 
 impl Tokens {
     pub fn new(lines: Vec<String>) -> Tokens {
+
+        let mut token_buffer: VecDeque<String> = VecDeque::new();
+
+        for line in lines {
+            for token in line.split_whitespace().map(|x| x.into()) {
+                token_buffer.push_back(token);
+            }
+        }
+
         Tokens {
-            lines_buffer: VecDeque::from(lines),
-            token_buffer: vec![],
+            token_buffer,
             imported_files: BTreeSet::new(),
         }
     }
@@ -53,26 +60,26 @@ impl Tokens {
     /// Reads a token. If there are no tokens in the token buffer initially, moves lines to the token buffer until there is.
     pub fn read(&mut self) -> Option<String> {
 
-        while self.token_buffer.is_empty() {
+        // while self.token_buffer.is_empty() {
             
-            let result = self.lines_buffer.pop_front();
-            // let result: Option<String> = env::read();
+        //     let result = self.lines_buffer.pop_front();
+        //     // let result: Option<String> = env::read();
 
-            match result {
-                Some(line) => {
-                    self.token_buffer = line.split_whitespace().map(|x| x.into()).collect();
-                    self.token_buffer.reverse();
-                }
-                _ => {
-                    self.lines_buffer.pop_front();
-                    if self.lines_buffer.is_empty() {
-                        return None;
-                    }
-                }
-            }
-            // println!("Created token buffer {:?}", self.token_buffer);
-        }
-        self.token_buffer.pop()
+        //     match result {
+        //         Some(line) => {
+        //             self.token_buffer = line.split_whitespace().map(|x| x.into()).collect();
+        //             self.token_buffer.reverse();
+        //         }
+        //         _ => {
+        //             self.lines_buffer.pop_front(); // WHy is this necessary, shouldn't we know it's empty?
+        //             if self.lines_buffer.is_empty() {
+        //                 return None;
+        //             }
+        //         }
+        //     }
+        //     // println!("Created token buffer {:?}", self.token_buffer);
+        // }
+        self.token_buffer.pop_front()
     }
 
     fn read_file(&mut self) -> Option<String> {
