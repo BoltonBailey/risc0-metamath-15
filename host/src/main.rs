@@ -137,9 +137,16 @@ fn test_wff() {
 
     println!("Metamath file has {} lines.", axiom_file_lines.len());
 
+    let mut axiom_file_tokens: Vec<String> = Vec::new();
+    for line in axiom_file_lines {
+        for token in line.split_whitespace().map(|x| x.into()) {
+            axiom_file_tokens.push(token);
+        }
+    }
+
     println!("Serializing metamath file");
 
-    let serialized_file: Vec<u32> = to_vec(&axiom_file_lines).unwrap();
+    let serialized_file: Vec<u32> = to_vec(&axiom_file_tokens).unwrap();
 
     println!("Serializing target theorem");
 
@@ -192,10 +199,16 @@ fn time_file(filename: &str) {
 
     println!("Metamath file has {} lines.", axiom_file_lines.len());
 
+    let mut axiom_file_tokens: Vec<String> = Vec::new();
+    for line in axiom_file_lines {
+        for token in line.split_whitespace().map(|x| x.into()) {
+            axiom_file_tokens.push(token);
+        }
+    }
 
     println!("Serializing metamath file");
 
-    let serialized_file: Vec<u32> = to_vec(&axiom_file_lines).unwrap();
+    let serialized_file: Vec<u32> = to_vec(&axiom_file_tokens).unwrap();
 
     println!("Serializing target theorem");
 
@@ -275,9 +288,9 @@ fn time_file(filename: &str) {
 
 fn main() {
 
-    test_wff()
+    // time_file("theory/mm-benchmarks/wff.mm")
     // time_file("theory/mm-benchmarks/transfer.mm");
-    // time_file("theory/mm-benchmarks/svm5.mm");
-    // time_file("theory/mm-benchmarks/perceptron.mm");
+    time_file("theory/mm-benchmarks/svm5.mm");
+    time_file("theory/mm-benchmarks/perceptron.mm");
 
 }

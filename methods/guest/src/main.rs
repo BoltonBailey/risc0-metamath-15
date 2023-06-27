@@ -41,14 +41,12 @@ pub type Label = Rc<str>;
 pub type LanguageToken = Rc<str>;
 
 impl Tokens {
-    pub fn new(lines: Vec<String>) -> Tokens {
+    pub fn new(tokens: Vec<String>) -> Tokens {
 
         let mut token_buffer: VecDeque<String> = VecDeque::new();
 
-        for line in lines {
-            for token in line.split_whitespace().map(|x| x.into()) {
-                token_buffer.push_back(token);
-            }
+        for token in tokens {
+            token_buffer.push_back(token);
         }
 
         Tokens {
@@ -706,7 +704,7 @@ impl MM {
 /// Checks a single file with no imports, given as a path string. Returns whether is succeeded
 fn main() {
     let target_theorem: String = env::read();
-    let lines: Vec<String> = env::read();
+    let tokens: Vec<String> = env::read();
 
     let mut mm = MM::new(None, None);
 
@@ -718,7 +716,7 @@ fn main() {
     //     println!("line: {}", line);
     // }
 
-    let out = mm.read(&mut Tokens::new(lines));
+    let out = mm.read(&mut Tokens::new(tokens));
     if !out {
         panic!("Out should be successful")
     }
