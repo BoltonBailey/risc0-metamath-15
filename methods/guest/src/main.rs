@@ -59,92 +59,20 @@ impl Tokens {
 
     /// Reads a token. If there are no tokens in the token buffer initially, moves lines to the token buffer until there is.
     pub fn read(&mut self) -> Option<String> {
-
-        // while self.token_buffer.is_empty() {
-            
-        //     let result = self.lines_buffer.pop_front();
-        //     // let result: Option<String> = env::read();
-
-        //     match result {
-        //         Some(line) => {
-        //             self.token_buffer = line.split_whitespace().map(|x| x.into()).collect();
-        //             self.token_buffer.reverse();
-        //         }
-        //         _ => {
-        //             self.lines_buffer.pop_front(); // WHy is this necessary, shouldn't we know it's empty?
-        //             if self.lines_buffer.is_empty() {
-        //                 return None;
-        //             }
-        //         }
-        //     }
-        //     // println!("Created token buffer {:?}", self.token_buffer);
-        // }
         self.token_buffer.pop_front()
     }
 
-    fn read_file(&mut self) -> Option<String> {
-        // println!("reading file");
-
-        // let token = self.read();
-
-        // // Read in imported filenames until we run out, then return the next token.
-        // while let Some("$[") = token.as_deref() {
-        //     panic!("Doesn't currently support multiple files at once");
-        //     // let filename = self.read().expect("Couldn't find filename");
-        //     // let end_bracket = self.read().expect("Couldn't find end bracket");
-
-        //     // // println!("In read file found filename: {:?}, end_bracket: {:?}", filename, end_bracket);
-        //     // if end_bracket != "$]" {
-        //     //     panic!("End bracket not found");
-        //     // }
-
-        //     // if !self.imported_files.contains(&filename) {
-        //     //     // println!("Found new file {}", &filename);
-
-        //     //     panic!("Doesn't currently support multiple files at once");
-        //     //     // self.lines_buffer.push(BufReader::new(
-        //     //     //     File::open(filename.clone()).expect("Failed to open file"),
-        //     //     // ));
-        //     //     // self.imported_files.insert(filename);
-        //     // }
-        //     // token = self.read();
-        // }
-        // token
-        self.read()
-    }
-
-    pub fn read_comment(&mut self) -> Option<String> {
-        // println!("reading comment");
-
-        // loop {
-        //     let mut token = self.read_file();
-        //     // println!("In read comment: found token to be {:?}", token);
-        //     match &token {
-        //         None => return None,
-        //         // If token is comment start, loop reading more tokens until we reach a comment end, then
-        //         Some(x) if x == "$(" => loop {
-        //             match token.as_deref() {
-        //                 Some("$)") => break,
-        //                 _ => token = self.read(),
-        //             }
-        //         },
-        //         _ => return token,
-        //     }
-        // }
-
-        self.read_file()
-    }
 
     pub fn read_statement(&mut self) -> Statement {
         let mut stat: Vec<Rc<str>> = vec![];
         let mut token = self
-            .read_comment()
+            .read()
             .expect("Failed to read token in read stat");
 
         // println!("In read stat, found token to be {:?}", token);
         while token != "$." {
             stat.push(token.into());
-            token = self.read_comment().expect("EOF before $.");
+            token = self.read().expect("EOF before $.");
         }
         stat.into()
     }
@@ -402,7 +330,7 @@ impl MM {
         // println!("Starting function read");
         self.fs.push();
         let mut label: Option<String> = None;
-        let mut tok = tokens.read_comment();
+        let mut tok = tokens.read();
         // println!("In MM read, found token to be {:?}", tok);
         loop {
             match tok.as_deref() {
@@ -495,7 +423,7 @@ impl MM {
                 }
                 None => break,
             }
-            tok = tokens.read_comment();
+            tok = tokens.read();
         }
         self.fs.list.pop();
         true
