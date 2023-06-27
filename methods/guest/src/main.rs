@@ -29,7 +29,7 @@ use core::ops::Deref;
 #[derive(Debug)]
 pub struct Tokens {
     token_buffer: VecDeque<String>,
-    imported_files: BTreeSet<String>,
+    // imported_files: BTreeSet<String>,
 }
 
 //since statement may be used multiple times when applying substitution
@@ -53,7 +53,7 @@ impl Tokens {
 
         Tokens {
             token_buffer,
-            imported_files: BTreeSet::new(),
+            // imported_files: BTreeSet::new(),
         }
     }
 
@@ -85,7 +85,7 @@ impl Tokens {
     fn read_file(&mut self) -> Option<String> {
         // println!("reading file");
 
-        let mut token = self.read();
+        let token = self.read();
 
         // Read in imported filenames until we run out, then return the next token.
         while let Some("$[") = token.as_deref() {
