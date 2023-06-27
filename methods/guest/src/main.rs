@@ -89,24 +89,25 @@ impl Tokens {
 
         // Read in imported filenames until we run out, then return the next token.
         while let Some("$[") = token.as_deref() {
-            let filename = self.read().expect("Couldn't find filename");
-            let end_bracket = self.read().expect("Couldn't find end bracket");
+            panic!("Doesn't currently support multiple files at once");
+            // let filename = self.read().expect("Couldn't find filename");
+            // let end_bracket = self.read().expect("Couldn't find end bracket");
 
-            // println!("In read file found filename: {:?}, end_bracket: {:?}", filename, end_bracket);
-            if end_bracket != "$]" {
-                panic!("End bracket not found");
-            }
+            // // println!("In read file found filename: {:?}, end_bracket: {:?}", filename, end_bracket);
+            // if end_bracket != "$]" {
+            //     panic!("End bracket not found");
+            // }
 
-            if !self.imported_files.contains(&filename) {
-                // println!("Found new file {}", &filename);
+            // if !self.imported_files.contains(&filename) {
+            //     // println!("Found new file {}", &filename);
 
-                panic!("Doesn't currently support multiple files at once");
-                // self.lines_buffer.push(BufReader::new(
-                //     File::open(filename.clone()).expect("Failed to open file"),
-                // ));
-                // self.imported_files.insert(filename);
-            }
-            token = self.read();
+            //     panic!("Doesn't currently support multiple files at once");
+            //     // self.lines_buffer.push(BufReader::new(
+            //     //     File::open(filename.clone()).expect("Failed to open file"),
+            //     // ));
+            //     // self.imported_files.insert(filename);
+            // }
+            // token = self.read();
         }
         token
     }
